@@ -1,8 +1,10 @@
 import Koa from 'koa'
 import koaStatic from 'koa-static'
 import { api } from './controllers'
+import { Db } from './model';
 
 async function run(port: number) {
+    await Db.initDb();
     const app = new Koa();
     app.use(koaStatic('./dist'));
     app.use(api.routes());
