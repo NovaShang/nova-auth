@@ -13,8 +13,7 @@ export class Db {
     static db?: MongoDb;
     static async initDb() {
         const mongo = new MongoClient(process.env.MONGO!);
-        if (mongo.isConnected())
-            await mongo.connect();
+        await mongo.connect();
         this.db = mongo.db(process.env.DB ?? 'auth');
         await this.users.createIndex('email');
     }
